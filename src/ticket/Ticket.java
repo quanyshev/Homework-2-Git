@@ -2,6 +2,7 @@ package ticket;
 
 import methods.Methods;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Ticket {
     private String ID;
@@ -18,6 +19,12 @@ public class Ticket {
     // ID
     public String getID() {
         return this.ID;
+    }
+
+    static public ArrayList<Ticket> ticketList = new ArrayList<>();
+
+    {
+        ticketList.add(this);
     }
 
     public void setID(String ID) {
