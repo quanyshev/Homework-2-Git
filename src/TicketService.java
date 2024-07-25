@@ -1,3 +1,4 @@
+import methods.Methods;
 import ticket.Ticket;
 
 class TicketService {
@@ -17,5 +18,9 @@ class TicketService {
         //check ticket storage
         System.out.println(Ticket.ticketStorage.get(0).getID());
         System.out.println(Ticket.ticketStorage.get(1).getID());
+
+        //check that method to getting ticket by ID working
+        Ticket x = Methods.getTicketByID(Ticket.ticketStorage, "1231");
+        Ticket y = Methods.getTicketByID(Ticket.ticketStorage, "1232");
     }
 }
