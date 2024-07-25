@@ -1,5 +1,4 @@
 package ticket;
-
 import methods.Methods;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ public class Ticket {
     private float backpackWeight;
     private double tikcetPrice;
     private final Timestamp creationTime = new Timestamp(System.currentTimeMillis());
+    public static ArrayList<Ticket> ticketStorage = new ArrayList<Ticket>();
 
     //ADDING GETTER AND SETTER FOR PRIVATE VARIABLES
     // ID
@@ -111,6 +111,7 @@ public class Ticket {
 
     // empty
     public Ticket() {
+        ticketStorage.add(this);
     }
 
     // limited
@@ -129,6 +130,7 @@ public class Ticket {
         }
 
         this.time = Methods.parseTimestamp(time);
+        ticketStorage.add(this);
     }
     // full
     public Ticket(String ID, String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, float backpackWeight) {
@@ -159,5 +161,7 @@ public class Ticket {
         } else {
             throw new IllegalArgumentException("Allowed characters: 'A', 'B', 'C'.");
         }
+
+        ticketStorage.add(this);
     }
 }
