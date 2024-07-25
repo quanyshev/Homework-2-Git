@@ -1,21 +1,10 @@
 import methods.Methods;
 import ticket.Ticket;
 
+import java.util.ArrayList;
+
 class TicketService {
 
-    static String getTicketBySector(char sector){
-        Ticket ticket = null;
-        for (int i = 0; i < Ticket.ticketList.size(); i++) {
-            if(Ticket.ticketList.get(i).getStadiumSector() == sector){
-                ticket = Ticket.ticketList.get(i);
-            }
-        }
-        if(ticket != null)
-            return ticket.getID();
-        else
-            return "no tickets found";
-    }
-  
     public static void main(String[] args) {
 
         Ticket ticket1 = new Ticket("1231", "Alpha", 111, "14.02.2025 10:00", true, 'A', 23);
@@ -36,5 +25,8 @@ class TicketService {
         //check that method to getting ticket by ID working
         Ticket x = Methods.getTicketByID(Ticket.ticketStorage, "1231");
         Ticket y = Methods.getTicketByID(Ticket.ticketStorage, "1232");
+
+        //check that method to getting ticket by sector working
+        ArrayList<Ticket> z = Methods.getTicketBySector('A');
     }
 }

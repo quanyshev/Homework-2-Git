@@ -21,12 +21,6 @@ public class Ticket {
         return this.ID;
     }
 
-    static public ArrayList<Ticket> ticketList = new ArrayList<>();
-
-    {
-        ticketList.add(this);
-    }
-
     public void setID(String ID) {
         if (ID.length() <= 4) {
             this.ID = ID;
