@@ -20,16 +20,20 @@ public class Methods {
 
     // 2) Method to get ticket object by ID
     public static Ticket getTicketByID(ArrayList<Ticket> ticketStorage, String ID) {
-        Ticket result = null;
+        if (ID.length() <= 4) {
+            Ticket result = null;
 
-        for (Ticket ticket : ticketStorage) {
-            if (ticket.getID() == ID) {
-                result = ticket;
-                break;
+            for (Ticket ticket : ticketStorage) {
+                if (ticket.getID() == ID) {
+                    result = ticket;
+                    break;
+                }
             }
+            System.out.println("Ticket with next ID is retrieved: " + result.getID());
+            return result;
+        } else {
+            throw new IllegalArgumentException("Cannot be more than 4 characters.");
         }
-        System.out.println("Ticket with next ID is retrieved: " + result.getID());
-        return result;
     }
 
     // 3)  Method to get ticket object by sector
