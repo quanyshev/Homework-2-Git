@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Methods {
+    //some feature, just for PR check
+
     // Method to parse the string and convert it to Timestamp
     public static Timestamp parseTimestamp(String dateTimeString) {
         // Define the formatter with the pattern of the input string
