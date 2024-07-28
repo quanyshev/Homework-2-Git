@@ -19,17 +19,25 @@ public class Methods {
     }
 
     // 2) Method to get ticket object by ID
-    public static Ticket getTicketByID(ArrayList<Ticket> ticketStorage, String ID) {
-        if (ID.length() <= 4) {
+    public static Ticket getTicketByID(ArrayList<Ticket> ticketStorage, int ID) {
+        if (String.valueOf(ID).length() <= 4) {
+            boolean isTicketFound = false;
             Ticket result = null;
 
             for (Ticket ticket : ticketStorage) {
                 if (ticket.getID() == ID) {
                     result = ticket;
+                    isTicketFound = true;
                     break;
                 }
             }
-            System.out.println("Ticket with next ID is retrieved: " + result.getID());
+
+            if (isTicketFound) {
+                System.out.println("Ticket with next ID is retrieved: " + result.getID());
+            } else {
+                System.out.println("Ticket not found");
+            }
+
             return result;
         } else {
             throw new IllegalArgumentException("Cannot be more than 4 characters.");
