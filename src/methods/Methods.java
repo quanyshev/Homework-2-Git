@@ -1,5 +1,7 @@
 package methods;
 import ticket.Ticket;
+
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +20,7 @@ public class Methods {
         return Timestamp.valueOf(localDateTime);
     }
 
-    // 2) Method to get ticket object by ID
+    // Method to get ticket object by ID
     public static Ticket getTicketByID(ArrayList<Ticket> ticketStorage, int ID) {
         if (String.valueOf(ID).length() <= 4) {
             boolean isTicketFound = false;
@@ -44,7 +46,7 @@ public class Methods {
         }
     }
 
-    // 3)  Method to get ticket object by sector
+    // Method to get ticket object by sector
     public static ArrayList<Ticket> getTicketBySector(char sector) {
         ArrayList<Ticket> result = new ArrayList<>();
 
@@ -61,6 +63,27 @@ public class Methods {
             return result;
         } else {
             throw new IllegalArgumentException("No ticket found");
+        }
+    }
+
+    // Method for NullableWarning annotation
+    public static void processorNullableWarnings(Object obj) {
+        Class<?> clazz = obj.getClass();
+
+        if (clazz.isAnnotationPresent(NullableWarning.class)) {
+            Field[] fields = clazz.getDeclaredFields();
+
+            for (Field field : fields) {
+                try {
+                    field.setAccessible(true);
+                    Object value = field.get(obj);
+                    if (value == null) {
+                        System.out.println("[" + field.getName() + "] is null in [" + clazz.getSimpleName() + "]!");
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

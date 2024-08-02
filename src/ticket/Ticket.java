@@ -1,9 +1,13 @@
 package ticket;
+import methods.Printable;
 import methods.Methods;
+import methods.NullableWarning;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class Ticket {
+@NullableWarning
+public class Ticket implements Printable {
     private static int counter = 1;
     private final int id; {id = counter; counter++;};
     private final String concertHall;
@@ -11,10 +15,37 @@ public class Ticket {
     private Timestamp time;
     private final boolean isPromo;
     private char stadiumSector;
-    private final float backpackWeight;
+    private final Float backpackWeight;
     private final double tikcetPrice;
     private final Timestamp creationTime = new Timestamp(System.currentTimeMillis());
     public static final ArrayList<Ticket> ticketStorage = new ArrayList<Ticket>();
+
+    @Override
+    public void print() {
+        System.out.println("Ticket ID: " + this.id + "; " + "Event code: " + this.eventCode + "; " + "Time: " + this.time + "; " +
+                "Sector: " + this.stadiumSector + "; " + "Allowed backpack weight: " + this.backpackWeight + "; "
+                + "Price: " + this.tikcetPrice + "; " + "Creation time: " + this.creationTime);
+    }
+    @Override
+    public boolean equals(Object ticket) {
+        if (ticket == null || this.getClass() != ticket.getClass()) {
+            return false;
+        }
+        if (this == ticket) {
+            return true;
+        }
+        return this.getID() == ((Ticket) ticket).getID();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getID();
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + "\nSector: " + stadiumSector + "\nPrice: " + tikcetPrice;
+    }
 
     // ADDING GETTER AND SETTER FOR PRIVATE VARIABLES
     // Time getter and setter
@@ -63,7 +94,8 @@ public class Ticket {
     }
 
     // Initializing the constructor
-    public Ticket(String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, float backpackWeight, double tikcetPrice) {
+
+    public Ticket(String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, Float backpackWeight, double tikcetPrice) {
         this.time = Methods.parseTimestamp(time);
         this.isPromo = isPromo;
         this.backpackWeight = backpackWeight;
